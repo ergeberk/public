@@ -3,105 +3,224 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>404 Not Found - Edukasi Seram</title>
+<title>404 Not Found - Edukasi Seram Mewah</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-  
-  /* Reset & base */
+
+  /* Reset */
   * {
     margin: 0; padding: 0; box-sizing: border-box;
   }
   body, html {
     height: 100%;
-    background: #0a0a0a;
-    color: #eee;
+    background: linear-gradient(135deg, #050005, #1a001a);
     font-family: 'Share Tech Mono', monospace;
-    overflow: hidden;
-  }
-
-  /* Container */
-  .container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
+    color: #eaeaea;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
   }
 
-  /* Glowing 404 text */
-  h1 {
-    font-size: 10rem;
-    color: #f54291;
-    text-shadow:
-      0 0 5px #f54291,
-      0 0 10px #f54291,
-      0 0 20px #f54291,
-      0 0 40px #ff00de,
-      0 0 80px #ff00de;
-    animation: flicker 3s infinite;
+  /* Background fog and stars */
+  .stars, .fog {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 0;
   }
 
-  @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-      opacity: 1;
-      text-shadow:
-        0 0 5px #f54291,
-        0 0 10px #f54291,
-        0 0 20px #f54291,
-        0 0 40px #ff00de,
-        0 0 80px #ff00de;
+  /* Stars */
+  .stars {
+    background: transparent;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 5s infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%, 100% {opacity: 0.8;}
+    50% {opacity: 0.3;}
+  }
+
+  /* Fog effect using gradient blur */
+  .fog {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,0,255,0.08), transparent 70%),
+      radial-gradient(circle at 80% 70%, rgba(255,0,255,0.06), transparent 70%);
+    filter: blur(30px);
+    animation: fogMove 60s linear infinite;
+    opacity: 0.2;
+  }
+  @keyframes fogMove {
+    0% {background-position: 0 0, 0 0;}
+    100% {background-position: 100% 100%, 100% 100%;}
+  }
+
+  /* Container main */
+  .container {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px 100px;
+    text-align: center;
+  }
+
+  /* Glitch effect for 404 */
+  h1 {
+    font-size: 14rem;
+    position: relative;
+    color: #ff00ff;
+    text-transform: uppercase;
+    letter-spacing: 20px;
+    user-select: none;
+    filter: drop-shadow(0 0 10px #ff00ff);
+    animation: flickerGlitch 4s infinite;
+  }
+  h1::before, h1::after {
+    content: "404";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    color: #ff00ff;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+  }
+  h1::before {
+    left: 2px;
+    text-shadow: -2px 0 cyan;
+    animation: glitchTop 3s infinite linear alternate-reverse;
+  }
+  h1::after {
+    left: -2px;
+    text-shadow: -2px 0 magenta;
+    animation: glitchBottom 2.5s infinite linear alternate-reverse;
+  }
+  @keyframes flickerGlitch {
+    0%, 100% {opacity: 1;}
+    20%, 24%, 55% {opacity: 0.5;}
+  }
+  @keyframes glitchTop {
+    0% {
+      clip: rect(0, 9999px, 45px, 0);
+      transform: translate(-2px, -2px);
     }
-    20%, 22%, 24%, 55% {
-      opacity: 0.5;
-      text-shadow: none;
+    20% {
+      clip: rect(10px, 9999px, 60px, 0);
+      transform: translate(2px, 2px);
+    }
+    40% {
+      clip: rect(5px, 9999px, 40px, 0);
+      transform: translate(-2px, 0);
+    }
+    60%, 100% {
+      clip: rect(0, 9999px, 45px, 0);
+      transform: translate(0);
+    }
+  }
+  @keyframes glitchBottom {
+    0% {
+      clip: rect(45px, 9999px, 90px, 0);
+      transform: translate(2px, 2px);
+    }
+    20% {
+      clip: rect(55px, 9999px, 70px, 0);
+      transform: translate(-2px, -2px);
+    }
+    40% {
+      clip: rect(50px, 9999px, 85px, 0);
+      transform: translate(2px, 0);
+    }
+    60%, 100% {
+      clip: rect(45px, 9999px, 90px, 0);
+      transform: translate(0);
     }
   }
 
   /* Subtitle */
   p.subtitle {
-    font-size: 1.5rem;
-    margin-top: -10px;
-    color: #bbb;
-    text-shadow: 0 0 5px #880088;
+    font-size: 2rem;
+    margin-top: -40px;
+    margin-bottom: 25px;
+    color: #dd33ff;
+    text-shadow: 0 0 10px #dd33ff;
   }
 
-  /* Message box */
+  /* Detailed message */
   .message {
-    margin-top: 20px;
-    font-size: 1.3rem;
-    max-width: 600px;
-    line-height: 1.5;
-    color: #ccc;
-    border: 2px solid #440044;
-    padding: 15px 20px;
-    border-radius: 10px;
-    background: rgba(20, 0, 20, 0.5);
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #ddd;
+    background: rgba(50, 0, 50, 0.5);
+    border-radius: 15px;
+    padding: 25px 30px;
+    max-width: 700px;
+    margin: 0 auto 40px;
     box-shadow:
-      0 0 15px 2px rgba(255, 0, 255, 0.7),
-      inset 0 0 10px 1px rgba(255, 0, 255, 0.3);
+      0 0 25px 3px rgba(255, 0, 255, 0.7),
+      inset 0 0 15px rgba(255, 0, 255, 0.4);
+    user-select: none;
   }
 
-  /* Floating educational icons container */
+  /* Button back */
+  .btn-back {
+    display: inline-block;
+    padding: 18px 45px;
+    font-size: 1.6rem;
+    color: #ff00ff;
+    background: transparent;
+    border: 3px solid #ff00ff;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 15px #ff00ff;
+    user-select: none;
+  }
+  .btn-back:hover {
+    background: #ff00ff;
+    color: #190019;
+    box-shadow:
+      0 0 30px 10px #ff00ff,
+      0 0 60px 20px #ff00ff;
+    transform: scale(1.05);
+  }
+
+  /* Footer info */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #770077;
+    font-size: 1rem;
+    font-style: italic;
+    user-select: none;
+    border-top: 1px solid #330033;
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+
+  /* Floating educational and spooky icons */
   .floating-icons {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
     top: 0; left: 0;
-    overflow: hidden;
-    z-index: 0;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 5;
   }
-
-  /* Each floating icon */
   .floating-icons span {
     position: absolute;
-    font-size: 20px;
     color: #ff00ffaa;
+    font-size: 25px;
     user-select: none;
-    opacity: 0.7;
     animation-timing-function: linear;
   }
 
@@ -109,71 +228,92 @@
 </head>
 <body>
 
+<!-- Background layers -->
+<div class="stars" id="stars"></div>
+<div class="fog"></div>
+
+<!-- Main content -->
 <div class="container">
   <h1>404</h1>
   <p class="subtitle">Halaman Tidak Ditemukan</p>
   <div class="message">
-    <p>Sepertinya halaman yang kamu cari tidak ada. Ini seperti misteri yang perlu dipecahkan oleh para penjelajah ilmu pengetahuan! Jangan menyerah, coba periksa kembali alamat URL atau kembali ke halaman utama untuk melanjutkan petualangan edukasi kamu.</p>
+    <p>
+      Sepertinya halaman yang kamu cari menghilang seperti misteri ilmu pengetahuan yang belum terpecahkan.<br />
+      Tapi jangan khawatir, setiap kesalahan adalah kesempatan belajar!<br />
+      Kembali ke halaman utama dan lanjutkan petualanganmu menggali ilmu pengetahuan yang seru dan penuh teka-teki.
+    </p>
   </div>
+  <button class="btn-back" onclick="goHome()">Kembali ke Beranda</button>
 </div>
 
+<!-- Floating icons -->
 <div class="floating-icons" id="floating-icons"></div>
 
-<script>
-  // Array karakter edukasi "seram" (misalnya buku, kaca pembesar, labu halloween, dll)
-  // Karena emoji edukasi agak terbatas, saya kombinasikan dengan simbol dan emoji "seram" edukasi:
-  const icons = [
-    '📚', // buku
-    '🔬', // mikroskop
-    '🧪', // tabung reaksi
-    '🧟‍♂️', // zombie (seram)
-    '💀', // tengkorak
-    '🕯️', // lilin
-    '🦇', // kelelawar
-    '🧠', // otak
-    '👻', // hantu
-    '🔎', // kaca pembesar
-  ];
+<!-- Footer -->
+<footer>
+  &copy; 2025 Edukasi Seram. Karena belajar itu penuh misteri dan keajaiban.
+</footer>
 
+<script>
+  // Floating icons (educational + spooky)
+  const icons = [
+    '📚','🔬','🧪','🧟‍♂️','💀','🕯️','🦇','🧠','👻','🔎',
+    '📖','🔭','🧬','🧫','⚗️','🌌','🧙‍♂️','🧝‍♀️','🧛‍♂️','🧟‍♀️'
+  ];
   const container = document.getElementById('floating-icons');
-  const count = 30;
+  const count = 50;
 
   function randomRange(min, max) {
     return Math.random() * (max - min) + min;
   }
 
-  // Membuat icon-icon melayang dengan posisi dan kecepatan random
-  for(let i=0; i < count; i++) {
+  for(let i=0; i<count; i++) {
     const icon = document.createElement('span');
     icon.textContent = icons[Math.floor(Math.random() * icons.length)];
     icon.style.left = randomRange(0, 100) + 'vw';
     icon.style.top = randomRange(0, 100) + 'vh';
-    icon.style.fontSize = randomRange(15, 35) + 'px';
-    icon.style.opacity = randomRange(0.3, 0.8);
+    icon.style.fontSize = randomRange(15, 40) + 'px';
+    icon.style.opacity = randomRange(0.2, 0.7);
 
-    // Animasi vertikal naik turun dengan durasi random
-    const duration = randomRange(8, 20);
+    // Floating animation duration and delay
+    const duration = randomRange(8, 25);
     icon.style.animation = `floatUpDown ${duration}s ease-in-out infinite`;
-    // Random delay supaya tidak serempak
     icon.style.animationDelay = (Math.random() * duration) + 's';
 
     container.appendChild(icon);
   }
 
-  // Tambahkan keyframes floatUpDown via JS
+  // Add keyframe animation floatUpDown dynamically
   const styleSheet = document.createElement('style');
   styleSheet.type = 'text/css';
   styleSheet.innerText = `
     @keyframes floatUpDown {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
     }
   `;
   document.head.appendChild(styleSheet);
+
+  // Stars background generation
+  const starsContainer = document.getElementById('stars');
+  const starsCount = 150;
+  for(let i=0; i<starsCount; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = randomRange(1, 3);
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.top = randomRange(0, 100) + 'vh';
+    star.style.left = randomRange(0, 100) + 'vw';
+    star.style.animationDelay = (Math.random() * 5) + 's';
+    starsContainer.appendChild(star);
+  }
+
+  // Button function to go home
+  function goHome() {
+    // Kembali ke halaman utama (sesuaikan URL sesuai kebutuhan)
+    window.location.href = '/';
+  }
 </script>
 
 </body>
